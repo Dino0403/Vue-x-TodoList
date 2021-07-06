@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/todomvc-app-css@2.3.0/index.css">
+</head>
+
+<body>
+  <div id="app">
+    <section class="todoapp">
+      <header class="header">
+        <h1>{{ message }}</h1>
+      </header>
+      <input type="text" class="new-todo" autofocus placeholder="需要做什麼？" v-model="newTodo" v-on:keyup.enter="addTodo">
+      <main class="main" v-show="todos.length">
+        <input id="toggle-all" type="checkbox" class="toggle-all" v-model="allDone">
+        <label for="toggle-all"></label>
+        <ul class="todo-list">
+          <li class="todo" v-for="todo in filterTodos"
+            v-bind:class="{completed:todo.completed,editing:todo.id === currentEditTodo.id}">
+            <div class="view">
+              <input class="toggle" type="checkbox" v-model="todo.completed">
+              <label v-on:dblclick="editTodo(todo)">{{todo.title}}</label>
+              <button v-on:click="removeTodo(todo)" class="destroy" />
+            </div>
+            <input type="text" class="edit" v-model="currentEditTodo.title" v-on:keyup.esc="cancelEditTodo"
+              v-on:keyup.enter="doneEdit" v-on:blur="doneEdit" v-todo-focus="todo.id === currentEditTodo.id">
+          </li>
+        </ul>
+      </main>
+      <footer class="footer" v-show="todos.length">
+        <span class="todo-count"> <strong> {{remainTodo}} </strong> {{remainTodo | pluarlize}} left </span>
+        <ul class="filters">
+          <li>
+            <a href="#/all" v-on:click="setVisibility('all')">All</a>
+          </li>
+          <li>
+            <a href="#/active" v-on:click="setVisibility('active')">Active</a>
+          </li>
+          <li>
+            <a href="#/completed" v-on:click="setVisibility('completed')">Completed</a>
+          </li>
+        </ul>
+        <button class="clear-completed" v-on:click="removeCompletedTodo">
+          Clear completed
+        </button>
+      </footer>
+    </section>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/uuid@latest/dist/umd/uuidv4.min.js"></script>
+  <script src="vue.js"></script>
+</body>
+
+</html>
