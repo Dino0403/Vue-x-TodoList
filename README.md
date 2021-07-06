@@ -11,4 +11,4 @@ A Todo-List web APP built by front-end framework Vue
 - 當工作項目存在時，點擊輸入框左邊之箭頭，可集體切換項目狀態
 
 ### Demo Link
-- https://dino0403.github.io/Vue-x-TodoList/
+- https://dino0403.github.io/Vue_x_TodoList/
